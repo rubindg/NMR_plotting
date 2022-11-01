@@ -9,7 +9,7 @@ from matplotlib import transforms
 file_locations = ["/Volumes/LaCie/Karolinska/NMR/DNP/221025_KI_duplex/10/",
                   "/Volumes/LaCie/Karolinska/NMR/DNP/221024_KI/14/",
                   "/Volumes/LaCie/Karolinska/NMR/DNP/221025_KI_duplex/1/"]
-colors = ['red', "blue", 'green']
+colors = ['red', "blue", 'green']           # Colors for 2D plots
 pdata_name = [1, 1, 1, 1]
 
 ''' Parameters for 2D plotting '''
