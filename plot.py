@@ -39,8 +39,8 @@ data7 = pd.read_table(load_1d(file1d, pdata=1308),
 
 spectrum = npl.Spectrum(file)
 spectrum1 = npl.Spectrum(file1)
-spectrum.threshold = 3
-spectrum1.threshold = 3
+spectrum.threshold = 3.5
+spectrum1.threshold = 3.5
 
 
 base = plt.gca().transData
@@ -48,10 +48,10 @@ rot = transforms.Affine2D().rotate_deg(90)
 
 xdata, ydata, clevs, extent, cmap = spectrum.plot_multi(nlevs=20)
 xdata1, ydata1, clevs1, extent1, cmap1 = spectrum1.plot_multi(nlevs=32, cmap='red')
-fig, ax = plt.subplots(figsize=cm2inch(6, 8))
+fig, ax = plt.subplots(figsize=cm2inch(6, 12))
 ax.contour(*xdata, ydata, clevs, extent=extent, cmap=cmap)
 ax.set_xlim(150.3, 146)
-ax.set_ylim(146, 139)
+ax.set_ylim(95, 35)
 ax1 = ax.twinx()
 ax1.plot(data1["ppm"], data1["intensity"], color="red")
 ax1.plot(data2["ppm"], data2["intensity"], color="red")
@@ -62,7 +62,8 @@ ax1.plot(data6["ppm"], data6["intensity"], color="red")
 ax1.plot(data7["ppm"], data7["intensity"], color="red")
 ax1.set_ylim(-25e4, 5e4 + max(data1["intensity"]))
 plt.subplots_adjust(left=0.2)
+plt.subplots_adjust(top=0.95)
 ax1.set_yticks([])
-plt.savefig("/Users/rubindasgupta/Desktop/test.png", dpi=300)
+plt.savefig("/Users/rubindasgupta/Desktop/test1.png", dpi=300)
 plt.show()
 
