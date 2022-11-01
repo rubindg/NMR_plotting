@@ -6,17 +6,29 @@ import numpy as np
 from matplotlib import transforms
 
 
+'''Define parameters for users'''
 file_locations = ["/Volumes/LaCie/Karolinska/NMR/DNP/221025_KI_duplex/10/",
-                  "/Volumes/LaCie/Karolinska/NMR/DNP/221025_KI_duplex/11/"]
-colors = ['red', "blue"]
-threshold = [3.5, 3.5]
-clev_factor = [1.1, 1.1]
-countour_levels = [32, 32]
-pdata_name_2d = [1, 1]
-transparent = [0.5, 1]
-xaxis_limits = [200, -50]
-yaxis_limits = [200, -50]
+                  "/Volumes/LaCie/Karolinska/NMR/DNP/221024_KI/14/"]
+colors = ['red', "blue", 'green']
+threshold = [3.5, 2, 3.5]
+clev_factor = [1.1, 1.1, 1.1]
+countour_levels = [20, 26, 32]
+pdata_name_2d = [1, 1, 1]
+transparent = [0.6, 0.5, 0.5]
 
+xaxis_limits = [155, 144]
+yaxis_limits = [120, 110]
+
+savefigure = False
+save_path = ""
+dpi = 300
+'''End of defining parameters by users'''
+
+
+#######################################################
+'''
+Coding starts (do not touch)
+'''
 
 def load_1d(expno, pdata=1):
     pdata_path = path.join(expno, f"pdata/{pdata}/ascii-spec.txt")
@@ -44,12 +56,13 @@ for i in range(len(spectra)):
     plt.contour(*xdata, ydata, clevs, extent=extent, cmap=cmap, alpha=transparent[i])
     plt.xlim(xaxis_limits[0], xaxis_limits[1])
     plt.ylim(yaxis_limits[0], yaxis_limits[1])
-    plt.xlabel(f"{xlabel} (ppm)")
-    plt.ylabel(f"{ylabel} (ppm)")
-    plt.subplots_adjust(left=0.28)
-    plt.subplots_adjust(top=0.95)
+    plt.xlabel(f"{xlabel} (ppm)", fontsize=14)
+    plt.ylabel(f"{ylabel} (ppm)", fontsize=14)
+    plt.tick_params(labelsize=14)
+    plt.subplots_adjust(left=0.15)
+    plt.subplots_adjust(bottom=0.15)
 plt.show()
 
-
-# plt.savefig("/Users/rubindasgupta/Desktop/test1.png", dpi=300)
+if savefigure:
+    plt.savefig(save_path, dpi=dpi)
 
