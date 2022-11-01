@@ -14,6 +14,8 @@ clev_factor = [1.1, 1.1]
 countour_levels = [32, 32]
 pdata_name_2d = [1, 1]
 transparent = [0.5, 1]
+xaxis_limits = [200, -50]
+yaxis_limits = [200, -50]
 
 
 def load_1d(expno, pdata=1):
@@ -34,15 +36,17 @@ for i in range(len(file_locations)):
     spectrum = npl.Spectrum(file_locations[i], pdata=pdata_name_2d[i])
     spectra.append(spectrum)
 
-fig, ax = plt.subplots(figsize=cm2inch(6, 12))
+fig, ax = plt.subplots()
 for i in range(len(spectra)):
     spectra[i].threshold = threshold[i]
-    xdata, ydata, clevs, extent, cmap = spectra[i].plot_multi(nlevs=countour_levels[i], cmap=colors[i],
+    xdata, ydata, clevs, extent, cmap, xlabel, ylabel = spectra[i].plot_multi(nlevs=countour_levels[i], cmap=colors[i],
                                                               factor=clev_factor[i])
     plt.contour(*xdata, ydata, clevs, extent=extent, cmap=cmap, alpha=transparent[i])
-    plt.xlim(150.3, 146)
-    plt.ylim(95, 35)
-    plt.subplots_adjust(left=0.2)
+    plt.xlim(xaxis_limits[0], xaxis_limits[1])
+    plt.ylim(yaxis_limits[0], yaxis_limits[1])
+    plt.xlabel(f"{xlabel} (ppm)")
+    plt.ylabel(f"{ylabel} (ppm)")
+    plt.subplots_adjust(left=0.28)
     plt.subplots_adjust(top=0.95)
 plt.show()
 

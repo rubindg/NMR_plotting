@@ -354,7 +354,9 @@ class Spectrum:
             clevs = clevs
             extent = self.ppm_ranges
             cmap = cmap
+            xlabel = self.label[0]
+            ylabel = self.label[1]
         if self.ndim == 1:
             return xdata, ydata
         elif self.ndim == 2:
-            return xdata, ydata, clevs, extent, cmap
+            return xdata, ydata, clevs, extent, cmap, xlabel, ylabel
