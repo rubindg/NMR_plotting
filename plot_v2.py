@@ -22,6 +22,8 @@ transparent = [0.6, 0.5, 0.5]
 normalize = False                       # True if you want to normalize the 1D spectra (very slow)
 color1d = "black"                       # Color for 1D
 offset = 100                             # Y-axis offset
+factor = 1                              # Factor for scaling the 1D spectrum
+show_yaxis = True
 '''Limits for the x-axis and y-axis'''
 xaxis_limits = [155, 144]
 yaxis_limits = [120, 110]
@@ -83,8 +85,13 @@ for i in range(len(spectra)):
         xdata1d, ydata1d = spectra[i].plot_multi()
         ax1 = ax.twinx()
         ax1.set_ylim(-10, 50 + max(ydata1d))
-        ax1.plot(xdata1d, offset+ydata1d, color=color1d)
-        # ax1.set_yticks([])
+        ax1.plot(xdata1d, offset+factor*ydata1d, color=color1d)
+        if show_yaxis == False:
+            ax1.set_yticks([])
+        else:
+            ax1.tick_params(labelsize=14)
+            ax1.set_ylabel("Intensity (AU)", fontsize=14)
+            plt.subplots_adjust(right=0.85)
 
     plt.xlim(xaxis_limits[0], xaxis_limits[1])
     ax.set_ylim(yaxis_limits[0], yaxis_limits[1])
